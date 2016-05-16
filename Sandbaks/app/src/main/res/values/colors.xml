@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Titan Oil Colors-->
+    <!-- #191b1f -->
+    <!-- #252830 -->
+    <!-- #18b37e -->
+    <!-- #999999 -->
+    <!-- Sandbaks Colors-->
+    <color name="colorPrimary">#2C3237</color>
+    <color name="colorPrimaryDark">#2C3237</color>
+    <color name="colorAccent">#FBAE17</color>
+    <color name="colorText">#F2F2F2</color>
+    <color name="colorSub">#74818C</color>
+
+</resources>
