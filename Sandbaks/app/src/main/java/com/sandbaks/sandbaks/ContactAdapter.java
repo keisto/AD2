@@ -23,7 +23,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
         // Get the data item for this position
         Contact contact = getItem(position);
 
-        v = LayoutInflater.from(getContext()).inflate(R.layout.contact_item, parent, false);
+        v = LayoutInflater.from(getContext()).inflate(R.layout.item_contact, parent, false);
         // Get UI Elements
         TextView name = (TextView) v.findViewById(R.id.name);
         TextView title = (TextView) v.findViewById(R.id.title);

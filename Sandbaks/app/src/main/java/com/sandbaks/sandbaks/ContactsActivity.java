@@ -12,15 +12,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ContactsActivity extends AppCompatActivity {
     @Override
@@ -41,6 +44,7 @@ public class ContactsActivity extends AppCompatActivity {
 
     public static class ContactsFragment extends Fragment {
         private Context mContext;
+        private JSONObject user;
         private ListView listView;
 
     public ContactsFragment newInstance(Context context) {
@@ -53,6 +57,7 @@ public class ContactsActivity extends AppCompatActivity {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         getActivity().setTitle("Contacts");
+        user = getSavedUser(getActivity());
         View rv = inflater.inflate(R.layout.fragment_contacts, container, false);
         listView = (ListView) rv.findViewById(R.id.listView);
         return rv;
@@ -61,8 +66,43 @@ public class ContactsActivity extends AppCompatActivity {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ArrayList<Contact> arr = readData();
-        listView.setAdapter(new ContactAdapter(getActivity(), arr));
+        final ArrayList<Contact> arr = readData();
+        Collections.sort(arr, new Comparator<Contact>() {
+            @Override
+            public int compare(Contact one, Contact two) {
+                String id1 = one.getName().split(" ")[0];
+                String id2 = two.getName().split(" ")[0];
+
+                return id1.compareTo(id2);
+            }
+        });
+
+        ArrayList<Contact> secondSort = arr;
+
+        Collections.sort(secondSort, new Comparator<Contact>() {
+                @Override
+                public int compare(Contact one, Contact two) {
+                    String id1 = String.valueOf(one.getAccess());
+                    String id2 = String.valueOf(two.getAccess());
+
+                    return id2.compareTo(id1);
+                }
+        });
+
+        listView.setAdapter(new ContactAdapter(getActivity(), secondSort));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getActivity(), ContactActivity.class);
+                if (arr != null) {
+                    i.putExtra(Contact.NAME,   arr.get(position).getName());
+                    i.putExtra(Contact.PHONE,  arr.get(position).getPhone());
+                    i.putExtra(Contact.EMAIL,  arr.get(position).getEmail());
+                    i.putExtra(Contact.ACCESS, arr.get(position).getAccess());
+                }
+                startActivity(i);
+            }
+        });
     }
 
     @Override
@@ -75,7 +115,21 @@ public class ContactsActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.self) {
-            // View Self - MileStone 2
+            // View Self
+            if (user != null) {
+            Intent i = new Intent(getActivity(), ContactActivity.class);
+                try {
+                    i.putExtra(Contact.NAME,   user.getString("firstname")
+                            + " " + user.getString("lastname"));
+                    i.putExtra(Contact.PHONE,  user.getString("phone"));
+                    i.putExtra(Contact.EMAIL,  user.getString("email"));
+                    i.putExtra(Contact.ACCESS, user.getInt("access"));
+                    startActivity(i);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -98,6 +152,36 @@ public class ContactsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return arr;
+    }
+
+    public JSONObject getSavedUser(Context context) {
+        String result = "";
+        File external = context.getExternalFilesDir(null);
+        File file = new File(external, "user.txt");
+        try {
+            FileInputStream fin= new FileInputStream(file);
+            InputStreamReader isr = new InputStreamReader(fin);
+            char[] data = new char[2048];
+            int size;
+            try {
+                while ((size = isr.read(data))>0){
+                    String readData = String.copyValueOf(data,0,size);
+                    result += readData;
+                    data = new char[2048];
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        JSONObject object = null;
+        try {
+            object = new JSONObject(result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
     }
 }
 

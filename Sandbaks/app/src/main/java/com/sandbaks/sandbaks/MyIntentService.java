@@ -28,6 +28,8 @@ public class MyIntentService extends IntentService {
     public static final String LOGIN = "com.sandbaks.sandbaks.LOGIN";
     public static final String CONTACTS = "com.sandbaks.sandbaks.CONTACTS";
     public static final String TICKETS = "com.sandbaks.sandbaks.TICKETS";
+    public static final String TICKET = "com.sandbaks.sandbaks.TICKET";
+    public static final String DELETE_TICKET = "com.sandbaks.sandbaks.DELETE_TICKET";
     public static final String RESULT = "com.sandbaks.sandbaks.RESULT";
     public static final String USER = "com.sandbaks.sandbaks.USER";
 
@@ -47,6 +49,18 @@ public class MyIntentService extends IntentService {
         c.startService(i);
     }
 
+    public static void getTickets(Context c) {
+        Intent i = new Intent(c, MyIntentService.class);
+        i.setAction(TICKETS);
+        c.startService(i);
+    }
+    public static void deleteTicket(Context c, int key) {
+        Intent i = new Intent(c, MyIntentService.class);
+        i.setAction(DELETE_TICKET);
+        i.putExtra(TICKET, key);
+        c.startService(i);
+    }
+
 
     @Override
     protected void onHandleIntent(Intent i) {
@@ -59,9 +73,39 @@ public class MyIntentService extends IntentService {
             if (CONTACTS.equals(i.getAction())) {
                 handleActionGetContacts();
             }
+            if (TICKETS.equals(i.getAction())) {
+                handleActionGetTickets();
+            }
+            if (DELETE_TICKET.equals(i.getAction())) {
+                int key = i.getIntExtra(TICKET,0);
+                handleDeleteTicket(key);
+            }
         }
     }
 
+    private void handleDeleteTicket(int key) {
+        String result;
+        JSONObject jsonResult;
+        if (isConnected()) {
+            try {
+                String urlExtras = "delete.php" + "?id=" +key;
+                URLConnection conn = new URL(URL + urlExtras).openConnection();
+                result = IOUtils.toString(conn.getInputStream());
+                jsonResult = new JSONObject(result);
+                if (jsonResult.get("result") == 0) {
+                    // Delete Failed
+
+                } else if (jsonResult.get("result")==1) {
+                    // Ticket Deleted
+                }
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Intent i = new Intent(RESULT);
+            sendBroadcast(i);
+        }
+    }
     private void handleActionGetData(String user, String pass) {
         String result;
         JSONObject jsonResult;
@@ -118,6 +162,25 @@ public class MyIntentService extends IntentService {
             sendBroadcast(i);
         }
     }
+
+    private void handleActionGetTickets() {
+        String result;
+        if (isConnected()) {
+            try {
+                String urlExtras = "tickets.php";
+                URLConnection conn = new URL(URL + urlExtras).openConnection();
+                result = IOUtils.toString(conn.getInputStream());
+                saveTickets(result);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Intent i = new Intent(RESULT);
+            sendBroadcast(i);
+        }
+    }
+
+
     private void saveUser(JSONObject object) {
         File external = getExternalFilesDir(null);
         File file = new File(external, "user.txt");
@@ -147,6 +210,12 @@ public class MyIntentService extends IntentService {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+    }
+    // Save Data
+    public void saveTickets(String jsonArray) {
+        Intent i = new Intent(MyReceiver.SAVE_TICKETS);
+        i.putExtra(MyReceiver.TICKETS, jsonArray);
+        sendBroadcast(i);
     }
 
     // Check to see if internet is available before calling for URL

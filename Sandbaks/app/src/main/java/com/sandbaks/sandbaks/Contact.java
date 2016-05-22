@@ -2,11 +2,13 @@ package com.sandbaks.sandbaks;
 
 import java.io.Serializable;
 
-/**
- * Created by buNny on 5/15/16.
- */
 public class Contact implements Serializable {
     private static final long serialVersionUID = 1234567890L;
+    public static String CONTACT = "com.sandbaks.sandbaks.CONTACT.CONTACT";
+    public static String NAME    = "com.sandbaks.sandbaks.CONTACT.NAME";
+    public static String PHONE   = "com.sandbaks.sandbaks.CONTACT.PHONE";
+    public static String EMAIL   = "com.sandbaks.sandbaks.CONTACT.EMAIL";
+    public static String ACCESS  = "com.sandbaks.sandbaks.CONTACT.ACCESS";
 
     // Variables
     private String name;

@@ -63,7 +63,8 @@ public class OverviewActivity extends AppCompatActivity {
             user = getSavedUser(getActivity());
             // Set Action Bar Title
             try {
-                getActivity().setTitle("Hello " + user.getString("firstname") + " " + user.getString("lastname") + ",");
+                getActivity().setTitle("Hello " + user.getString("firstname")
+                        + " " + user.getString("lastname") + ",");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -74,9 +75,14 @@ public class OverviewActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             // Get Contacts if first time
-            File file = new File(getActivity().getFilesDir(), "contacts");
-            if (!file.exists()) {
+            File fileContacts = new File(getActivity().getFilesDir(), "contacts");
+            if (!fileContacts.exists()) {
                 MyIntentService.getContacts(getActivity());
+            }
+            // Get Contacts if first time
+            File fileTickets = new File(getActivity().getFilesDir(), "tickets");
+            if (!fileTickets.exists()) {
+                MyIntentService.getTickets(getActivity());
             }
 
             View rv = inflater.inflate(R.layout.fragment_overview, container, false);
@@ -91,6 +97,14 @@ public class OverviewActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent iContact = new Intent(getActivity(), ContactsActivity.class);
                     startActivity(iContact);
+                }
+            });
+
+            tickets.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent iTicket = new Intent(getActivity(), TicketsActivity.class);
+                    startActivity(iTicket);
                 }
             });
             return rv;
