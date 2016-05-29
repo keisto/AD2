@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sandbaks.sandbaks.TicketActivity"
+    tools:context=".Activites.Ticket.TicketActivity"
     android:background="@color/colorPrimaryDark">
 
     <ImageView
@@ -12,6 +12,254 @@
         android:id="@+id/imageView4"
         android:src="@drawable/footer"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Company"
+        android:id="@+id/textView"
+        android:textColor="@color/colorSub"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="19dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Company Name"
+        android:id="@+id/company"
+        android:layout_marginLeft="19dp"
+        android:textColor="@color/colorText"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Attention"
+        android:id="@+id/textView2"
+        android:textColor="@color/colorSub"
+        android:layout_marginLeft="19dp"
+        android:layout_below="@+id/company"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Company Contact"
+        android:id="@+id/attention"
+        android:textColor="@color/colorText"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="19dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Work Order"
+        android:id="@+id/textView5"
+        android:textColor="@color/colorSub"
+        android:layout_marginLeft="19dp"
+        android:layout_below="@+id/attention"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Work"
+        android:id="@+id/work"
+        android:textColor="@color/colorText"
+        android:layout_below="@+id/textView5"
+        android:layout_alignStart="@+id/textView5"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Location"
+        android:id="@+id/textView6"
+        android:textColor="@color/colorSub"
+        android:layout_marginLeft="19dp"
+        android:layout_below="@+id/work"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Location Name"
+        android:id="@+id/location"
+        android:textColor="@color/colorText"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="19dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Supervisor"
+        android:id="@+id/textView8"
+        android:textColor="@color/colorSub"
+        android:layout_marginLeft="19dp"
+        android:layout_below="@+id/location"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Supervisor"
+        android:id="@+id/supervisor"
+        android:textColor="@color/colorText"
+        android:layout_below="@+id/textView8"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="19dp" />
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/space" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="AFE"
+        android:id="@+id/afe"
+        android:textColor="@color/colorText"
+        android:layout_marginLeft="9dp"
+        android:layout_below="@+id/textView5"
+        android:layout_toEndOf="@+id/space" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="AFE Number"
+        android:id="@+id/textView10"
+        android:textColor="@color/colorSub"
+        android:layout_marginLeft="9dp"
+        android:layout_above="@+id/afe"
+        android:layout_toEndOf="@+id/space" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Start Date/Time"
+        android:id="@+id/textView7"
+        android:textColor="@color/colorSub"
+        android:layout_marginLeft="19dp"
+        android:layout_below="@+id/job"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="DateTime"
+        android:id="@+id/start"
+        android:textColor="@color/colorText"
+        android:layout_below="@+id/textView7"
+        android:layout_alignLeft="@+id/supervisor"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="End Date/Time"
+        android:id="@+id/textView12"
+        android:textColor="@color/colorSub"
+        android:layout_marginLeft="9dp"
+        android:layout_alignTop="@+id/textView7"
+        android:layout_toEndOf="@+id/space" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="DateTime"
+        android:id="@+id/end"
+        android:textColor="@color/colorText"
+        android:layout_marginLeft="9dp"
+        android:layout_below="@+id/textView12"
+        android:layout_toEndOf="@+id/space" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Job Description"
+        android:id="@+id/textView13"
+        android:textColor="@color/colorSub"
+        android:layout_below="@+id/start"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="19dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Job Number"
+        android:id="@+id/job"
+        android:textColor="@color/colorText"
+        android:layout_marginLeft="19dp"
+        android:layout_below="@+id/textView11"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Job Number"
+        android:id="@+id/textView11"
+        android:textColor="@color/colorSub"
+        android:layout_below="@+id/supervisor"
+        android:layout_alignStart="@+id/job" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:layout_below="@+id/textView13"
+        android:layout_above="@+id/imageView4"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="19dp"
+        android:layout_marginRight="19dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text=""
+            android:id="@+id/description"
+            android:textColor="@color/colorText"
+            android:layout_below="@+id/textView13"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="19dp"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@+id/imageView4"
+            android:layout_marginRight="19dp"
+            android:scrollIndicators="bottom|end"
+            android:shadowColor="#751414" />
+    </ScrollView>
 
 </RelativeLayout>

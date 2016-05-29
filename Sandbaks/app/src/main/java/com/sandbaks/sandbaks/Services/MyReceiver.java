@@ -1,19 +1,16 @@
-package com.sandbaks.sandbaks;
+package com.sandbaks.sandbaks.Services;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.widget.Toast;
-
+import com.sandbaks.sandbaks.Serializables.Contact;
+import com.sandbaks.sandbaks.Serializables.Ticket;
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
@@ -22,11 +19,6 @@ public class MyReceiver extends BroadcastReceiver {
     public static final String CONTACTS = "com.sandbaks.sandbaks.CONTACTS";
     public static final String SAVE_TICKETS = "com.sandbaks.sandbaks.SAVE_TICKETS";
     public static final String TICKETS = "com.sandbaks.sandbaks.TICKETS";
-    public static final String READ_CONTACTS = "com.sandbaks.sandbaks.READ_CONTACTS";
-    public static final String C_NAME = "com.sandbaks.sandbaks.C_NAME";
-    public static final String C_PHONE = "com.sandbaks.sandbaks.C_PHONE";
-    public static final String C_EMAIL = "com.sandbaks.sandbaks.C_PHONE";
-    public static final String C_ACCESS = "com.sandbaks.sandbaks.C_ACCESS";
     public MyReceiver() {
     }
 
@@ -61,6 +53,7 @@ public class MyReceiver extends BroadcastReceiver {
                 try {
                     jsonResult = new JSONArray(i.getStringExtra(TICKETS));
                     for (int x = 0; x < jsonResult.length() ; x++) {
+                        int id = Integer.parseInt(jsonResult.getJSONObject(x).getString("id"));
                         String c = jsonResult.getJSONObject(x).getString("company");
                         String a = jsonResult.getJSONObject(x).getString("attention");
                         String w = jsonResult.getJSONObject(x).getString("work");
@@ -74,7 +67,7 @@ public class MyReceiver extends BroadcastReceiver {
                         String y = jsonResult.getJSONObject(x).getString("createdby");
                         Float h = Float.valueOf(jsonResult.getJSONObject(x).getString("hours"));
                         int u = Integer.parseInt(jsonResult.getJSONObject(x).getString("status"));
-                        arr.add(new Ticket(c, a, l, s, d, y, t, e, f, j, w, h, u));
+                        arr.add(new Ticket(id, c, a, l, s, d, y, t, e, f, j, w, h, u));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -122,20 +115,6 @@ public class MyReceiver extends BroadcastReceiver {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-
-        // Read Contacts
-        public ArrayList readContacts() {
-            ArrayList<Contact> arr = null;
-            ObjectInputStream is;
-            try {
-                is = new ObjectInputStream(new FileInputStream(contactsFile));
-                arr = (ArrayList<Contact>) is.readObject();
-                is.close();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            return arr;
         }
     }
 }

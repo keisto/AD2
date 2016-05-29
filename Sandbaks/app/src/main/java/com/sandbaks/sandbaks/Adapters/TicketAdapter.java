@@ -1,9 +1,8 @@
-package com.sandbaks.sandbaks;
+package com.sandbaks.sandbaks.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.sandbaks.sandbaks.R;
+import com.sandbaks.sandbaks.Serializables.Ticket;
+
 import java.util.ArrayList;
 
 public class TicketAdapter extends ArrayAdapter<Ticket> {

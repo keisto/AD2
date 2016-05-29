@@ -1,7 +1,9 @@
-package com.sandbaks.sandbaks;
+package com.sandbaks.sandbaks.Activites.Main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.sandbaks.sandbaks.Activites.Contact.ContactsActivity;
+import com.sandbaks.sandbaks.Activites.Ticket.TicketsActivity;
+import com.sandbaks.sandbaks.Services.MyIntentService;
+import com.sandbaks.sandbaks.R;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
@@ -59,30 +66,51 @@ public class OverviewActivity extends AppCompatActivity {
                                  ViewGroup container,
                                  Bundle savedInstanceState) {
             setHasOptionsMenu(true);
-            // Load User
-            user = getSavedUser(getActivity());
+            if (getSavedUser(getActivity())!=null) {
+                // Load User
+                user = getSavedUser(getActivity());
+            } else {
+                // Go to Login
+                getActivity().finish();
+                Intent i = new Intent(getActivity(), LoginActivity.class);
+                startActivity(i);
+            }
             // Set Action Bar Title
             try {
-                getActivity().setTitle("Hello " + user.getString("firstname")
-                        + " " + user.getString("lastname") + ",");
+                if (user == null){
+                    // Go to Login
+                    getActivity().finish();
+                    Intent i = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(i);
+                } else {
+                    getActivity().setTitle("Hello " + user.getString("firstname")
+                            + " " + user.getString("lastname") + ",");
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            // Get User's Timecard
-            try {
-                new getUserTimecard().execute(new URL(URL+"?uid="+user.getString("id")));
-            } catch (MalformedURLException | JSONException e) {
-                e.printStackTrace();
+
+            if (isConnected()) {
+                // Get User's Timecard
+                if (user != null) {
+                    try {
+                        new getUserTimecard().execute(new URL(URL + "?uid=" + user.getString("id")));
+                    } catch (MalformedURLException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
             // Get Contacts if first time
-            File fileContacts = new File(getActivity().getFilesDir(), "contacts");
-            if (!fileContacts.exists()) {
-                MyIntentService.getContacts(getActivity());
-            }
-            // Get Contacts if first time
-            File fileTickets = new File(getActivity().getFilesDir(), "tickets");
-            if (!fileTickets.exists()) {
-                MyIntentService.getTickets(getActivity());
+            if (user != null) {
+                File fileContacts = new File(getActivity().getFilesDir(), "contacts");
+                if (!fileContacts.exists()) {
+                    MyIntentService.getContacts(getActivity());
+                }
+                // Get Contacts if first time
+                File fileTickets = new File(getActivity().getFilesDir(), "tickets");
+                if (!fileTickets.exists()) {
+                    MyIntentService.getTickets(getActivity());
+                }
             }
 
             View rv = inflater.inflate(R.layout.fragment_overview, container, false);
@@ -110,6 +138,23 @@ public class OverviewActivity extends AppCompatActivity {
             return rv;
         }
 
+        // Check to see if internet is available before calling for URL
+        public boolean isConnected() {
+            ConnectivityManager mgr = (ConnectivityManager)
+                    getActivity().getSystemService(CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = mgr.getActiveNetworkInfo();
+            if (netInfo != null) {
+                if (netInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+                    return true;
+                } else if (netInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+            return false;
+        }
+
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
@@ -125,7 +170,7 @@ public class OverviewActivity extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
         }
 
-        // Get JSONObeject form URL
+        // Get JSONObject form URL
         private class getUserTimecard extends AsyncTask<java.net.URL, Integer, JSONObject> {
             @Override
             protected JSONObject doInBackground(java.net.URL... urls) {

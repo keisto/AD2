@@ -1,4 +1,4 @@
-package com.sandbaks.sandbaks;
+package com.sandbaks.sandbaks.Serializables;
 
 import java.io.Serializable;
 
@@ -6,6 +6,7 @@ public class Ticket implements Serializable {
     private static final long serialVersionUID = 987654321L;
 
     // Variables
+    private int id;
     private String company;
     private String attention;
     private String location;
@@ -21,9 +22,10 @@ public class Ticket implements Serializable {
     private int status;
 
     // Create Ticket
-    public Ticket(String company, String attention, String location, String supervisor,
+    public Ticket(int id, String company, String attention, String location, String supervisor,
                   String description, String created, String start, String end, String afe,
                   String job, String work, float hours, int status) {
+        this.id = id;
         this.company = company;
         this.attention = attention;
         this.location = location;
@@ -53,4 +55,5 @@ public class Ticket implements Serializable {
     public String getJob()         { return job; }
     public float  getHours()       { return hours; }
     public int    getStatus()      { return status; }
+    public int    getId()          { return id; }
 }

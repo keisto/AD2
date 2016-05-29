@@ -1,4 +1,4 @@
-package com.sandbaks.sandbaks;
+package com.sandbaks.sandbaks.Serializables;
 
 import java.io.Serializable;
 

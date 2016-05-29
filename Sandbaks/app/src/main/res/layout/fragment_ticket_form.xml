@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context=".TicketFormActivity">
+    tools:context=".Activites.Ticket.TicketFormActivity">
 
     <EditText
         android:layout_width="300dp"
@@ -17,24 +17,13 @@
         android:hint="Company Contact"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
-        android:inputType="textPassword"
-        android:layout_below="@+id/company"
-        android:layout_alignParentStart="true"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_alignParentEnd="true" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="52dp"
-        android:id="@+id/company"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/company"
         android:layout_alignParentStart="true"
-        android:background="#f2f2f2"
-        android:layout_marginLeft="8dp"
+        android:layout_alignParentEnd="true"
         android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp" />
+        android:inputType="text" />
 
     <EditText
         android:layout_width="300dp"
@@ -47,18 +36,17 @@
         android:hint="Work Order"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
-        android:inputType="textPassword"
         android:layout_below="@+id/attention"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/space"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="4dp" />
+        android:layout_marginRight="4dp"
+        android:inputType="text" />
 
     <Space
         android:layout_width="1dp"
         android:layout_height="fill_parent"
-        android:layout_alignTop="@+id/company"
         android:layout_centerHorizontal="true"
         android:id="@+id/space" />
 
@@ -73,13 +61,13 @@
         android:hint="AFE "
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
-        android:inputType="textPassword"
         android:layout_below="@+id/attention"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/space"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginRight="8dp" />
+        android:layout_marginRight="8dp"
+        android:inputType="text" />
 
     <EditText
         android:layout_width="300dp"
@@ -92,14 +80,14 @@
         android:hint="Location"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
-        android:inputType="textPassword"
         android:layout_below="@+id/work"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:layout_toStartOf="@+id/afe"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:inputType="text" />
 
     <EditText
         android:layout_width="300dp"
@@ -112,13 +100,13 @@
         android:hint="Job Number"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
-        android:inputType="textPassword"
-        android:layout_below="@+id/location"
-        android:layout_alignParentStart="true"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_below="@+id/supervisor"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginBottom="8dp"
-        android:layout_alignParentEnd="true" />
+        android:inputType="text" />
 
     <EditText
         android:layout_width="300dp"
@@ -128,15 +116,15 @@
         android:background="#f2f2f2"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
-        android:hint="End Time"
+        android:hint="End Time (1800)"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
-        android:inputType="textPassword"
+        android:inputType="number|textPassword"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="8dp"
-        android:layout_below="@+id/supervisor"
         android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/space" />
+        android:layout_alignStart="@+id/space"
+        android:layout_below="@+id/jobnumber" />
 
     <EditText
         android:layout_width="300dp"
@@ -146,26 +134,15 @@
         android:background="#f2f2f2"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
-        android:hint="Start Time"
+        android:hint="Start Time (0600)"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
-        android:inputType="textPassword"
+        android:inputType="number|textPassword"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="4dp"
-        android:layout_below="@+id/supervisor"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/space" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="52dp"
-        android:id="@+id/supervisor"
-        android:background="#f2f2f2"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_below="@+id/jobnumber"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="8dp" />
+        android:layout_toStartOf="@+id/space"
+        android:layout_below="@+id/jobnumber" />
 
     <EditText
         android:layout_width="300dp"
@@ -178,7 +155,6 @@
         android:hint="Description"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
-        android:inputType="textPassword"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_below="@+id/start"
@@ -187,6 +163,45 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:gravity="left|top" />
+        android:gravity="left|top"
+        android:inputType="text" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="52dp"
+        android:ems="10"
+        android:id="@+id/supervisor"
+        android:background="#f2f2f2"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:hint="Supervisor"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_below="@+id/location"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="8dp"
+        android:inputType="text" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="52dp"
+        android:ems="10"
+        android:id="@+id/company"
+        android:background="#f2f2f2"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:hint="Company"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="8dp"
+        android:inputType="text" />
 
 </RelativeLayout>

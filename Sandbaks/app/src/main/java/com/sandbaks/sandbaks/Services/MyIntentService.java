@@ -1,11 +1,10 @@
-package com.sandbaks.sandbaks;
+package com.sandbaks.sandbaks.Services;
 
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Bundle;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
@@ -15,11 +14,9 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 
 public class MyIntentService extends IntentService {
     public static final String USERNAME = "com.sandbaks.sandbaks.USERNAME";
@@ -144,15 +141,6 @@ public class MyIntentService extends IntentService {
                 String urlExtras = "contacts.php";
                 URLConnection conn = new URL(URL + urlExtras).openConnection();
                 result = IOUtils.toString(conn.getInputStream());
-//                jsonResult = new JSONArray(result);
-//                ArrayList<Contact> arr = new ArrayList<>();
-//                for (int i = 0; i < jsonResult.length() ; i++) {
-//                    String n = jsonResult.getJSONObject(i).getString("name");
-//                    String p = jsonResult.getJSONObject(i).getString("phone");
-//                    String e = jsonResult.getJSONObject(i).getString("email");
-//                    int a = Integer.parseInt(jsonResult.getJSONObject(i).getString("access"));
-//                    arr.add(new Contact(n, p, e, a));
-//                }
                 saveContacts(result);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -199,17 +187,6 @@ public class MyIntentService extends IntentService {
         Intent i = new Intent(MyReceiver.SAVE_CONTACTS);
         i.putExtra(MyReceiver.CONTACTS, jsonArray);
         sendBroadcast(i);
-//        try {
-//            FileOutputStream fos = new FileOutputStream(
-//                    new File(getApplicationContext().getFilesDir(),"")+
-//                            File.separator+"contacts");
-//            ObjectOutputStream os = new ObjectOutputStream(fos);
-//            os.writeObject(arr);
-//            os.close();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
     // Save Data
     public void saveTickets(String jsonArray) {

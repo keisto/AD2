@@ -1,4 +1,4 @@
-package com.sandbaks.sandbaks;
+package com.sandbaks.sandbaks.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.sandbaks.sandbaks.Serializables.Contact;
+import com.sandbaks.sandbaks.R;
 
 import java.util.ArrayList;
 

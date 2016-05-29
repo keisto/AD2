@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/edit"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_edit"
+        android:title="" />
+    <item
+        android:id="@+id/copy"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_copy"
+        android:title="" />
+    <item
+        android:id="@+id/delete"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_delete"
+        android:title="" />
+</menu>

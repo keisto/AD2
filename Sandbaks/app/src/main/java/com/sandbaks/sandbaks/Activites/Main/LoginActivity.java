@@ -1,4 +1,4 @@
-package com.sandbaks.sandbaks;
+package com.sandbaks.sandbaks.Activites.Main;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.sandbaks.sandbaks.Services.MyIntentService;
+import com.sandbaks.sandbaks.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,7 +27,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private UpdateReceiver mReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
